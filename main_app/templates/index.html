@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
- 
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+  <link rel="stylesheet" href="static/css/style.css">
+
   <title>Wacky Widgets</title>
 </head>
 <body>
@@ -15,15 +16,25 @@
     {% if widgets|length == 0 %}
     <p>Add Widget</p>
     {% else %}
-       <table>
+       <table style="width: 50%">
            <tr>
                <th>Description</th>
                <th>Quantity</th>
+               <th>Delete</th>
            </tr>
+           {% for widget in widgets %}
+           <tr>
+               <td>{{ widget.description }}</td>
+               <td>{{widget.quantity}}</td>
+               <button type="submit">
+               <a href="{% url 'delete_widget' widget.id %}">X</a>
+            </button>
+           </tr>
+           {% endfor %}
        </table>
     {% endif %}
     <hr>
-  
-
+    <h4>Add Widget</h4>
+    <a href="{% url 'add_widget' %}">ADD WIDGET</a>
 </body>
 </html>
